@@ -11,7 +11,7 @@ def cal():
     inp = st.text_input("Enter the expression to calculate: ")
     if inp:
         try:
-            exp = sympify(inp).evalf()    #evalf() It is used to make the answer in decimal.
+            exp = sympify(inp).evalf()    #evalf() = Evaluate a symbolic expression and return the result in decimal (floating-point) form.
             if not exp.is_number:
                 st.error("Enter correct value which is Integers or numbers...")
             else:
