@@ -1,7 +1,6 @@
 import sympy
 from sympy import *
-import streamlit as st
-
+import streamlit as st 
 st.title("🧮 Interactive Calculator")
 def cal():
     '''Will calculate '''
@@ -9,16 +8,23 @@ def cal():
         st.session_state.history = {}
 
     inp = st.text_input("Enter the expression to calculate: ")
+    a = symbols()
     if inp:
-        try:
-            exp = sympify(inp).evalf()    #evalf() = Evaluate a symbolic expression and return the result in decimal (floating-point) form.
-            if not exp.is_number:
-                st.error("Enter correct value which is Integers or numbers...")
-            else:
-                st.success(f"The answer is : {exp}")
-                st.session_state.history[inp] = exp
-        except Exception as e:
-            st.error(f"Error: {e}")
+        option = st.radio("Select an operation:",["Simplify", "Solve", "Expand", "Solve for variable"])
+        
+        if option == "Solve":
+            exp = sympify(inp).evalf()
+        elif option == "Simplify":
+            exp = factor(inp)
+        elif option == "Expand":
+            exp = expand(inp)
+        else:
+            # Will soon add solve for variable
+            pass
+
+        st.success(f"The answer is : {exp}")
+        st.session_state.history[inp] = exp
+        
         if st.toggle("Show History"):
             st.subheader("📜Calcultion History")
             for i, j in st.session_state.history.items():
