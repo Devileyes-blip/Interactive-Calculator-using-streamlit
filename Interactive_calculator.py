@@ -8,7 +8,7 @@ def cal():
         st.session_state.history = {}
 
     inp = st.text_input("Enter the expression to calculate: ")
-    a = symbols()
+    a = symbols('x')
     if inp:
         option = st.radio("Select an operation:",["Simplify", "Solve", "Expand", "Solve for variable"])
         
