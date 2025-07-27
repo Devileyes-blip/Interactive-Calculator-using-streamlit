@@ -18,9 +18,16 @@ def cal():
             exp = factor(inp)
         elif option == "Expand":
             exp = expand(inp)
+        elif option == "Solve for variable":
+            if "=" in inp:
+                lhs, rhs = inp.split("=")
+                lhs_expr, rhs_expr = sympify(lhs), sympify(rhs)
+                equation = Eq(lhs_expr, rhs_expr)
+                exp = solve(equation, a)
+            else:
+                exp = solve(inp, a)
         else:
-            # Will soon add solve for variable
-            pass
+            st.success("Invalid Operation")
 
         st.success(f"The answer is : {exp}")
         st.session_state.history[inp] = exp
